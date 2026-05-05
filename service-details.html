@@ -5,447 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service Details</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-            background: #fff;
-            color: #000;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: #000;
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 40px;
-            margin-top: 40px;
-            transition: opacity 0.3s;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .back-link:hover {
-            opacity: 0.6;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 80px 20px;
-            font-size: 1rem;
-            color: #000;
-        }
-
-        .spinner {
-            border: 3px solid #e0e0e0;
-            border-top: 3px solid #000;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            margin-top: 15px;
-            font-weight: 500;
-        }
-
-        .error {
-            background: #fff;
-            color: #000;
-            padding: 30px;
-            border-radius: 0;
-            margin: 40px 0;
-            border: 2px solid #000;
-            border-left: 5px solid #000;
-        }
-
-        .error-title {
-            font-weight: 700;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            font-size: 0.85em;
-        }
-
-        .error-message {
-            font-size: 0.95em;
-            color: #333;
-        }
-
-        .service-header {
-            background: #fff;
-            border-radius: 0;
-            overflow: hidden;
-            margin-bottom: 60px;
-        }
-
-        .service-image {
-            width: 100%;
-            height: 500px;
-            background: #f5f5f5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 6em;
-            color: #000;
-            overflow: hidden;
-        }
-
-        .service-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .service-info {
-            padding: 60px;
-            background: #fff;
-        }
-
-        .service-category {
-            display: inline-block;
-            background: #000;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 0;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .service-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #000;
-            margin-bottom: 20px;
-            line-height: 1.1;
-            letter-spacing: -1px;
-        }
-
-        .service-rating {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 30px;
-            font-size: 0.95em;
-        }
-
-        .service-rating .stars {
-            color: #000;
-            font-size: 1.2em;
-        }
-
-        .service-rating .reviews {
-            color: #666;
-        }
-
-        .service-price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #000;
-            margin-bottom: 30px;
-        }
-
-        .service-description {
-            font-size: 1.1em;
-            color: #333;
-            margin-bottom: 40px;
-            line-height: 1.8;
-            max-width: 800px;
-        }
-
-        .features-section {
-            background: #f5f5f5;
-            padding: 50px;
-            border-radius: 0;
-            margin-bottom: 60px;
-        }
-
-        .features-section h3 {
-            color: #000;
-            margin-bottom: 30px;
-            font-size: 1.5em;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .features-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 15px 0;
-        }
-
-        .feature-item::before {
-            content: "✓";
-            color: #000;
-            font-weight: 700;
-            font-size: 1.2em;
-            flex-shrink: 0;
-        }
-
-        .feature-text {
-            font-size: 0.95em;
-            color: #333;
-        }
-
-        .details-section {
-            background: #fff;
-            padding: 0;
-            border-radius: 0;
-            margin-bottom: 60px;
-        }
-
-        .details-section h3 {
-            color: #000;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .details-section p {
-            color: #333;
-            line-height: 1.8;
-            font-size: 1.05em;
-            max-width: 900px;
-        }
-
-        .cta-section {
-            background: #000;
-            color: #fff;
-            padding: 80px 60px;
-            border-radius: 0;
-            text-align: center;
-            margin: 80px 0;
-        }
-
-        .cta-section h2 {
-            margin-bottom: 15px;
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-        }
-
-        .cta-section p {
-            font-size: 1.1em;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 16px 40px;
-            border-radius: 0;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: none;
-            cursor: pointer;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-primary {
-            background: #fff;
-            color: #000;
-            margin: 0 10px;
-        }
-
-        .btn-primary:hover {
-            background: #f0f0f0;
-            transform: scale(1.05);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #fff;
-            border: 2px solid #fff;
-            margin: 0 10px;
-        }
-
-        .btn-secondary:hover {
-            background: #fff;
-            color: #000;
-            transform: scale(1.05);
-        }
-
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        footer {
-            background: #000;
-            color: #fff;
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 60px;
-            font-size: 0.9em;
-        }
-
-        /* Mobile First Responsive */
-        @media (max-width: 768px) {
-            .service-title {
-                font-size: 2rem;
-            }
-
-            .service-image {
-                height: 300px;
-                font-size: 4em;
-            }
-
-            .service-info {
-                padding: 30px;
-            }
-
-            .features-section {
-                padding: 30px;
-            }
-
-            .cta-section {
-                padding: 40px 30px;
-            }
-
-            .cta-section h2 {
-                font-size: 1.8rem;
-            }
-
-            .service-price {
-                font-size: 1.8rem;
-            }
-
-            .service-description {
-                font-size: 1rem;
-            }
-
-            .details-section h3,
-            .features-section h3 {
-                font-size: 1.2em;
-            }
-
-            .btn {
-                padding: 12px 30px;
-                font-size: 0.85em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .back-link {
-                margin-top: 20px;
-                margin-bottom: 20px;
-                font-size: 0.8rem;
-            }
-
-            .service-title {
-                font-size: 1.6rem;
-                margin-bottom: 15px;
-            }
-
-            .service-image {
-                height: 250px;
-                font-size: 3em;
-            }
-
-            .service-info {
-                padding: 20px;
-            }
-
-            .service-price {
-                font-size: 1.5rem;
-                margin-bottom: 20px;
-            }
-
-            .service-description {
-                font-size: 0.9rem;
-                margin-bottom: 30px;
-            }
-
-            .features-section {
-                padding: 20px;
-                margin-bottom: 40px;
-            }
-
-            .features-list {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .feature-item {
-                padding: 10px 0;
-            }
-
-            .details-section {
-                margin-bottom: 40px;
-            }
-
-            .details-section h3 {
-                font-size: 1.1em;
-                margin-bottom: 15px;
-            }
-
-            .cta-section {
-                padding: 30px 20px;
-                margin: 50px 0;
-            }
-
-            .cta-section h2 {
-                font-size: 1.5rem;
-                margin-bottom: 10px;
-            }
-
-            .cta-section p {
-                font-size: 0.95em;
-                margin-bottom: 25px;
-            }
-
-            .btn {
-                padding: 10px 20px;
-                margin: 5px;
-                font-size: 0.8em;
-            }
-
-            .btn-group {
-                gap: 5px;
-            }
-        }
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',sans-serif;background:#fff;color:#000;line-height:1.6}.container{max-width:1200px;margin:0 auto;padding:0 20px}.back-link{display:inline-flex;align-items:center;gap:10px;color:#000;text-decoration:none;font-weight:600;margin-bottom:40px;margin-top:40px;transition:opacity .3s;font-size:.9rem;text-transform:uppercase;letter-spacing:1px}.back-link:hover{opacity:.6}.loading{text-align:center;padding:80px 20px;font-size:1rem;color:#000}.spinner{border:3px solid #e0e0e0;border-top:3px solid #000;border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin:20px auto}@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.loading-text{margin-top:15px;font-weight:500}.error{background:#fff;color:#000;padding:30px;border-radius:0;margin:40px 0;border:2px solid #000;border-left:5px solid #000}.error-title{font-weight:700;margin-bottom:8px;text-transform:uppercase;font-size:.85em}.error-message{font-size:.95em;color:#333}.service-header{background:#fff;border-radius:0;overflow:hidden;margin-bottom:60px}.service-image{width:100%;height:500px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:6em;color:#000;overflow:hidden}img.service-img{width:100%;height:100%;object-fit:cover}.service-info{padding:60px;background:#fff}.service-category{display:inline-block;background:#000;color:#fff;padding:8px 16px;border-radius:0;font-size:.75rem;font-weight:700;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px}.service-title{font-size:3.5rem;font-weight:700;color:#000;margin-bottom:20px;line-height:1.1;letter-spacing:-1px}.service-rating{display:flex;align-items:center;gap:12px;margin-bottom:30px;font-size:.95em}.service-rating .stars{color:#000;font-size:1.2em}.service-rating .reviews{color:#666}.service-price{font-size:2.5rem;font-weight:700;color:#000;margin-bottom:30px}.service-description{font-size:1.1em;color:#333;margin-bottom:40px;line-height:1.8;max-width:800px}.features-section{background:#f5f5f5;padding:50px;border-radius:0;margin-bottom:60px}.features-section h3{color:#000;margin-bottom:30px;font-size:1.5em;font-weight:700;text-transform:uppercase;letter-spacing:1px}.features-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}.feature-item{display:flex;align-items:flex-start;gap:15px;padding:15px 0}.feature-item::before{content:'✓';color:#000;font-weight:700;font-size:1.2em;flex-shrink:0}.feature-text{font-size:.95em;color:#333}.details-section{background:#fff;padding:0;border-radius:0;margin-bottom:60px}.details-section h3{color:#000;margin-bottom:20px;font-size:1.5em;font-weight:700;text-transform:uppercase;letter-spacing:1px}.details-section p{color:#333;line-height:1.8;font-size:1.05em;max-width:900px}.cta-section{background:#000;color:#fff;padding:80px 60px;border-radius:0;text-align:center;margin:80px 0}.cta-section h2{margin-bottom:15px;font-size:2.5rem;font-weight:700;letter-spacing:-1px}.cta-section p{font-size:1.1em;margin-bottom:40px;opacity:.9}.btn{display:inline-block;padding:16px 40px;border-radius:0;text-decoration:none;font-weight:700;transition:all .3s cubic-bezier(.25,.46,.45,.94);border:none;cursor:pointer;font-size:.9em;text-transform:uppercase;letter-spacing:1px}.btn-primary{background:#fff;color:#000;margin:0 10px}.btn-primary:hover{background:#f0f0f0;transform:scale(1.05)}.btn-secondary{background:transparent;color:#fff;border:2px solid #fff;margin:0 10px}.btn-secondary:hover{background:#fff;color:#000;transform:scale(1.05)}.btn-group{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}footer{background:#000;color:#fff;text-align:center;padding:40px 20px;margin-top:60px;font-size:.9em}@media(max-width:768px){.service-title{font-size:2rem}.service-image{height:300px;font-size:4em}.service-info{padding:30px}.features-section{padding:30px}.cta-section{padding:40px 30px}.cta-section h2{font-size:1.8rem}.service-price{font-size:1.8rem}.service-description{font-size:1rem}.details-section h3,.features-section h3{font-size:1.2em}.btn{padding:12px 30px;font-size:.85em}}@media(max-width:480px){.container{padding:0 15px}.back-link{margin-top:20px;margin-bottom:20px;font-size:.8rem}.service-title{font-size:1.6rem;margin-bottom:15px}.service-image{height:250px;font-size:3em}.service-info{padding:20px}.service-price{font-size:1.5rem;margin-bottom:20px}.service-description{font-size:.9rem;margin-bottom:30px}.features-section{padding:20px;margin-bottom:40px}.features-list{grid-template-columns:1fr;gap:15px}.feature-item{padding:10px 0}.details-section{margin-bottom:40px}.details-section h3{font-size:1.1em;margin-bottom:15px}.cta-section{padding:30px 20px;margin:50px 0}.cta-section h2{font-size:1.5rem;margin-bottom:10px}.cta-section p{font-size:.95em;margin-bottom:25px}.btn{padding:10px 20px;margin:5px;font-size:.8em}.btn-group{gap:5px}}
     </style>
 </head>
 <body>
@@ -454,9 +14,9 @@
 
         <div id="loading" class="loading">
             <div class="spinner"></div>
-            <div class="loading-text">Loading service details...</div>
+            <div class="loading-text">Loading details...</div>
         </div>
-        <div id="error" class="error" style="display: none;">
+        <div id="error" class="error" style="display:none">
             <div class="error-title">⚠ Error</div>
             <div class="error-message"></div>
         </div>
@@ -464,110 +24,96 @@
         <div id="serviceContainer"></div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Professional Services. All rights reserved.</p>
-    </footer>
+    <footer><p>&copy; 2026 Professional Services. All rights reserved.</p></footer>
 
     <script>
-        const API_URL = 'http://localhost:5000/api/services';
+    const API_URL = 'http://localhost:5000/api/services';
+    const DOM = {
+        loading: null,
+        error: null,
+        errorMsg: null,
+        container: null
+    };
 
-        // Get slug from URL
-        function getSlugFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            return params.get('slug');
-        }
+    function escapeHtml(text) {
+        const map = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'};
+        return text.replace(/[&<>"']/g, char => map[char]);
+    }
 
-        // Fetch service details
-        async function fetchServiceDetails() {
-            try {
-                const slug = getSlugFromURL();
-                if (!slug) {
-                    throw new Error('Service not found. Invalid URL.');
-                }
+    function initDOM() {
+        DOM.loading = document.getElementById('loading');
+        DOM.error = document.getElementById('error');
+        DOM.errorMsg = document.querySelector('.error-message');
+        DOM.container = document.getElementById('serviceContainer');
+    }
 
-                const response = await fetch(`${API_URL}/${slug}`);
-
-                if (!response.ok) {
-                    throw new Error(`HTTP Error: ${response.status}`);
-                }
-
-                const result = await response.json();
-
-                if (result.success) {
-                    renderServiceDetails(result.data);
-                } else {
-                    throw new Error(result.message || 'Failed to fetch service details');
-                }
-
-                document.getElementById('loading').style.display = 'none';
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('error').style.display = 'block';
-                document.querySelector('.error-message').textContent = error.message || 'Unable to load service details. Please try again.';
+    async function loadServiceDetails() {
+        try {
+            const slug = new URLSearchParams(window.location.search).get('slug');
+            if (!slug) {
+                showError('Service slug not found in URL');
+                return;
             }
+
+            const response = await fetch(`${API_URL}/${slug}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const result = await response.json();
+            if (!result.success || !result.data) {
+                showError(result.message || 'Service not found');
+                return;
+            }
+
+            displayService(result.data);
+            DOM.loading.style.display = 'none';
+        } catch (error) {
+            console.error('Error:', error);
+            showError(`Unable to load service details: ${error.message}`);
         }
+    }
 
-        // Render service details
-        function renderServiceDetails(service) {
-            const container = document.getElementById('serviceContainer');
+    function buildFeaturesHTML(features) {
+        return features && features.length
+            ? features.map(f => `<div class="feature-item"><div class="feature-text">${escapeHtml(f)}</div></div>`).join('')
+            : '';
+    }
 
-            const html = `
-                <div class="service-header">
-                    <div class="service-image">
-                        ${service.image_url ? `<img src="${service.image_url}" alt="${service.title}">` : service.icon || '◆'}
-                    </div>
-                    <div class="service-info">
-                        <div class="service-category">${service.category}</div>
-                        <h1 class="service-title">${service.title}</h1>
-                        <div class="service-rating">
-                            <span class="stars">★ ★ ★ ★ ★</span>
-                            <span class="reviews">${service.rating || 0} (${service.reviews || 0} reviews)</span>
-                        </div>
-                        ${service.price ? `<div class="service-price">$${service.price}</div>` : ''}
-                        <p class="service-description">${service.description}</p>
-                    </div>
-                </div>
+    function displayService(service) {
+        const featuresHTML = buildFeaturesHTML(service.features);
+        const imageHTML = service.image_url
+            ? `<img src="${escapeHtml(service.image_url)}" alt="${escapeHtml(service.title)}" class="service-img">`
+            : `<span>${escapeHtml(service.icon || '◆')}</span>`;
 
-                ${service.features && service.features.length > 0 ? `
-                    <div class="features-section">
-                        <h3>Key Features</h3>
-                        <div class="features-list">
-                            ${service.features.map(feature => `<div class="feature-item"><span class="feature-text">${feature}</span></div>`).join('')}
-                        </div>
-                    </div>
-                ` : ''}
-
-                <div class="details-section">
-                    <h3>Full Description</h3>
-                    <p>${service.details}</p>
-                </div>
-
-                <div class="cta-section">
-                    <h2>Ready to Get Started?</h2>
-                    <p>Contact our team today to discuss your project and get a free consultation.</p>
-                    <div class="btn-group">
-                        <button class="btn btn-primary" onclick="contactUs('${service.title}')">Contact Now</button>
-                        <button class="btn btn-secondary" onclick="requestQuote('${service.title}')">Request Quote</button>
-                    </div>
-                </div>
-            `;
-
-            container.innerHTML = html;
+        let html = `<div class="service-header"><div class="service-image">${imageHTML}</div><div class="service-info"><span class="service-category">${escapeHtml(service.category)}</span><h1 class="service-title">${escapeHtml(service.title)}</h1><div class="service-rating"><span class="stars">★</span><span>${service.rating || 0} (${service.reviews || 0} reviews)</span></div>`;
+        
+        if (service.price) html += `<div class="service-price">$${service.price}</div>`;
+        html += `<p class="service-description">${escapeHtml(service.description)}</p></div></div>`;
+        
+        if (featuresHTML) {
+            html += `<div class="features-section"><h3>Key Features</h3><div class="features-list">${featuresHTML}</div></div>`;
         }
-
-        // Contact function
-        function contactUs(serviceName) {
-            alert(`Thank you for your interest in ${serviceName}. We'll contact you shortly!`);
+        
+        if (service.details) {
+            html += `<div class="details-section"><h3>About This Service</h3><p>${escapeHtml(service.details)}</p></div>`;
         }
+        
+        html += `<div class="cta-section"><h2>Ready to Get Started?</h2><p>Contact us today to learn more about how we can help your business</p><div class="btn-group"><a href="mailto:info@services.com" class="btn btn-primary">Contact Us</a><a href="services.html" class="btn btn-secondary">Back to Services</a></div></div>`;
+        
+        DOM.container.innerHTML = html;
+    }
 
-        // Request quote function
-        function requestQuote(serviceName) {
-            alert(`Quote request for ${serviceName} has been submitted! Check your email soon.`);
-        }
+    function showError(message) {
+        DOM.loading.style.display = 'none';
+        DOM.error.style.display = 'block';
+        DOM.errorMsg.textContent = message;
+        DOM.container.innerHTML = '';
+    }
 
-        // Load service details on page load
-        fetchServiceDetails();
+    document.addEventListener('DOMContentLoaded', () => {
+        initDOM();
+        loadServiceDetails();
+    });
+    document.addEventListener('DOMContentLoaded', loadServiceDetails);
     </script>
 </body>
 </html>
